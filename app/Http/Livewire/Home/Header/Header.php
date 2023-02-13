@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Livewire\Home\Header;
+
+use App\Http\Controllers\CartController;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+
+class Header extends Component
+{
+    protected $listeners = [
+        'refreshComponent' => '$refresh'
+    ];
+
+
+    public $search;
+    public $search_term;
+    public $haveSearch = false;
+
+    public function updatedSearchTerm($search_term){
+        $this->search = preg_split('/\s+/', $search_term, -1, PREG_SPLIT_NO_EMPTY);
+        if($this->search_term){
+            $this->haveSearch = true;
+        }else{
+            $this->haveSearch = false;
+        }
+    }
+
+
+    public function link_to_search_page(){
+        $search_to_redirect='';
+        foreach($this->search as $key => $search){
+            $search_to_redirect = $search_to_redirect.'search['.$key.']='.$search.'&' ;
+        }
+        // dd($search_to_redirect);
+        return redirect('/search?'.$search_to_redirect);
+    }
+
+    public function notification_readed(){
+        // dd($notification->id);
+        auth()->user()->unreadNotifications->update(['read_at' => now()]);
+    }
+
+    public function delete_from_cart($item_id){
+        // dd($item_id);
+        CartController::delete($item_id);
+        $this->emit('refreshComponent');
+    }
+
+    public function logout(){
+        auth()->logout();
+    }
+
+
+
+    public function render()
+    {
+        return view('livewire.home.header.header',[
+            'parent_categories' => Category::where('parent_id' , 0)->get(),
+
+            'searchProducts' => $this->haveSearch ?
+                Product::when($this->search , function($all_products){
+                    $all_products
+                        ->orWhere(function ($products) {
+                            foreach ($this->search as $term) {
+                                $products->where('name', 'like', '%'.trim($term).'%');
+                                $products->orWhere('name', 'like', '%'.trim($term).'%');
+                            }
+                        })
+                        ->orWhereHas('product_attributes',function($products_att){
+                            foreach ($this->search as $term) {
+                                $products_att->where('value', trim($term));
+                                $products_att->orWhere('value', 'LiKE', '%'.trim($term).'%' );
+                            }
+                        });
+                })->get()
+                : []
+        ]);
+    }
+}

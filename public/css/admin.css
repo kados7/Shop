@@ -1,0 +1,57 @@
+
+@font-face {
+    font-family: IRANSANSWEB;
+    src: url('/IRANSANSWEB.ttf');
+}
+
+div{
+    font-family: IRANSANSWEB;
+    font-size: 15px;
+}
+.asidelink {
+    color: #f8f85b;
+    background-color:#4775B1;
+    border-radius: 10px 10px 0px 0px;
+}
+.asidelink:hover{
+    color: rgb(255, 255, 255);
+    background-color:rgba(30, 143, 255, 0.685);
+}
+
+
+.hovered_div {
+    position: relative;
+  }
+.overlay_select {
+    position: absolute;
+    top: 0%;
+    background: rgb(0, 0, 0);
+    color: #f1f1f1;
+    /* width: 30%; */
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 10px;
+    padding: 5px;
+    text-align: right;
+  }
+
+.overlay_delete {
+    position: absolute;
+    bottom: 0%;
+    background: rgb(0, 0, 0);
+    color: #f1f1f1;
+    /* width: 30%; */
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 10px;
+    padding: 0px;
+    text-align: right;
+  }
+.hovered_div:hover .overlay_select {
+    opacity: 1;
+  }
+.hovered_div:hover .overlay_delete {
+    opacity: 1;
+  }
