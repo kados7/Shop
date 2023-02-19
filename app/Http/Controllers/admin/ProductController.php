@@ -15,6 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Product::class);
+
         return view('admin.products.index');
     }
 
@@ -25,6 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Product::class);
+
         return view('admin.products.create');
     }
 
@@ -47,6 +51,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $this->authorize('view' , $product);
+
         return view('admin.products.show', [
             'product' => $product ,
             'tags' => $product->tags()->get() ,
@@ -64,6 +70,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update' , $product);
+
         return view('admin.products.edit',[
             'product' => $product,
         ]);
@@ -71,12 +79,16 @@ class ProductController extends Controller
 
     public function images_edit(Product $product)
     {
+        $this->authorize('update' , $product);
+
         return view('admin.products.edit',[
             'product' => $product,
         ]);
     }
     public function category_edit(Product $product)
     {
+        $this->authorize('update' , $product);
+
         return view('admin.products.edit',[
             'product' => $product,
         ]);

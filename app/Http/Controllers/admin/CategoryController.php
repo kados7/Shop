@@ -17,6 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Category::class);
 
         return view('admin.categories.index', [
             'categories' => Category::orderBy('parent_id')->paginate(20)
@@ -31,6 +32,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Category::class);
+
         return view('admin.categories.create');
     }
 
@@ -42,6 +45,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create' , Category::class);
+
         $request-> validate([
             'name'=> 'required|min:3',
             'slug'=> 'required|min:3|unique:categories,slug',
@@ -94,6 +99,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $this->authorize('view' , $category);
+
         return view('admin.categories.show',[
             'category' => $category
         ]);
@@ -107,6 +114,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->authorize('update' , $category);
+
         return view('admin.categories.edit',[
             'category' => $category
         ]);
@@ -121,6 +130,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->authorize('update' , $category);
+
         $request-> validate([
             'name'=> 'required|min:3',
             'slug' => 'required|unique:categories,slug,'.$category->id,

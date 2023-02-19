@@ -13,10 +13,18 @@
             <form wire:submit.prevent="storePermission()" method="POST">
                 @csrf
 
-                <div class="form-row">
+                <div class="form row">
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
                         <input wire:model="name" class="form-control" name="name" type="text">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="name">توانایی</label>
+                        <input wire:model="ability" class="form-control" name="ability" type="text">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="name">توضیحات</label>
+                        <textarea wire:model="description" class="form-control" name="description" type="text"></textarea>
                     </div>
                 </div>
 

@@ -34,9 +34,13 @@
                                     {{ $role->name }}
                                 </th>
                                 <th>
-                                    {{-- @foreach ($role->permissions as $permission)
-                                        {{$permission->name}} |
-                                    @endforeach --}}
+                                    @foreach ($role->permissions as $permission)
+                                        <span style="font-size: 12px ; color: {{ $permission->getColor()}}">
+                                            {{$permission->name}}
+                                        </span>
+                                        {!! $loop->iteration % 5 == 0 ?  "<br>" : '' !!}
+                                        {{$loop->last ? '' : '|'}}
+                                    @endforeach
                                 </th>
                                 <th>
                                     <a class="btn btn-sm btn-outline-success"

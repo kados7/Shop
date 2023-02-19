@@ -11,4 +11,8 @@ class Role extends Model
     use HasFactory;
     protected $table = "roles";
     protected $guarded = [] ;
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class , 'permission_role');
+    }
 }

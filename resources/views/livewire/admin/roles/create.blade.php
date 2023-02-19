@@ -15,7 +15,7 @@
                         <label for="name">نام</label>
                         <input wire:model.defer="name" class="form-control" name="name" type="text" value="{{ old('name') }}">
                     </div>
-                    {{-- <!-- Accordion -->
+                    <!-- Accordion -->
                     <div class="accordion accordion-flush" id="accordionPermissions">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
@@ -32,13 +32,13 @@
                                         <input wire:model.defer="selected_permissions.{{$permission->id}}" type="checkbox" class="form-check-input"
                                             id="permission_{{ $permission->id }}" value="{{ $permission->name }}">
                                         <label class="form-check-label mr-3" for="permission_{{ $permission->id }}">
-                                            {{ $permission->name }}
+                                            <span style="color: {{ $permission->getColor()}}">{{ $permission->name }}</span>
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                 <button type="submit" class="btn btn-outline-primary mt-5 mr-3">ثبت</button>
                 <a href="{{ route('admin.roles.index') }}" class="btn btn-dark mt-5 mr-3">بازگشت</a>

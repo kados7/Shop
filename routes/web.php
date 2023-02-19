@@ -88,5 +88,7 @@ Route::get('/search',[SearchController::class , 'index'])->name('home.search.ind
 
 Route::get('/test', function(){
     // CartFacade::clear();
-    dd(CartFacade::getContent());
+    // dd(CartFacade::getContent());
+
+    dd(auth()->user()->roles->first() , auth()->user()->roles->first()->permissions->toArray());
 })->name('home.compare.index');

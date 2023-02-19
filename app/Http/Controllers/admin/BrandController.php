@@ -16,6 +16,8 @@ class BrandController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Brand::class);
+
         return view('admin.brands.index', [
             'brands'=> Brand::latest()->paginate(20)
         ]);
@@ -28,6 +30,8 @@ class BrandController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Brand::class);
+
         return view('admin.brands.create');
     }
 
@@ -39,6 +43,8 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create' , Brand::class);
+
         $request->validate([
             'name' => 'required|min:3',
             'is_active' => 'required'
@@ -61,6 +67,8 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
+        $this->authorize('view' , $brand);
+
         return view('admin.brands.show', [
             'brand' => $brand
         ]);
@@ -74,6 +82,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
+        $this->authorize('update' , $brand);
+
         return view('admin.brands.edit', [
             'brand' => $brand
         ]);
@@ -88,6 +98,8 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
+        $this->authorize('update' , $brand);
+
         $request->validate([
             'name' => 'required|min:3',
             'is_active' => 'required'

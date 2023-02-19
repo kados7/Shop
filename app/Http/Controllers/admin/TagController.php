@@ -15,6 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Tag::class);
+
         return view('admin.tags.index' , [
             'tags' => Tag::latest()->paginate(20),
         ]);
@@ -27,6 +29,8 @@ class TagController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Tag::class);
+
         return view('admin.tags.create');
     }
 
@@ -38,6 +42,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create' , Tag::class);
+
         $request->validate([
             'name'=> 'required',
         ]);
@@ -66,6 +72,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
+        $this->authorize('update' , $tag);
+
         return view('admin.tags.edit',[
             'tag' => $tag
         ]);
@@ -80,6 +88,8 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        $this->authorize('update' , $tag);
+
         $request->validate([
             'name'=> 'required',
         ]);

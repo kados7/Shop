@@ -8,9 +8,9 @@
         <span><a class="btn btn-sm text-muted" href="{{route('home.categories.show' , ['category' => $product->category->slug])}}">{{$product->category->name}}</a>/</span>
 
         <span><a class="btn btn-sm text-black" >{{$product->name}}</a></span>
-        @role('super-admin')
+        @can('update', App\Models\Product::find($product->id))
             <a class="btn btn-sm btn-dark" href="{{route('admin.products.edit' , $product->id)}}">ویرایش محصول(admin)</a>
-        @endrole
+        @endcan
 
     </div>
 

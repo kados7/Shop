@@ -47,7 +47,7 @@
             href="{{route('admin.categories.index')}}">دسته بندی ها</a><br>
 
         <a  class="btn btn-sm {{request()->routeIs('admin.categories.create') ? 'text-danger' : ''}}"
-            href="{{route('admin.categories.create')}}">افزودن  بندی</a>
+            href="{{route('admin.categories.create')}}">افزودن دسته بندی</a>
 
     </div>
 

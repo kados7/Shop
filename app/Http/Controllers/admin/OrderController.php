@@ -15,6 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Order::class);
+
         return view('admin.orders.index');
     }
 
@@ -47,6 +49,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $this->authorize('view' , $order);
+
         return view('admin.orders.show',[
             'order' => $order
         ]);

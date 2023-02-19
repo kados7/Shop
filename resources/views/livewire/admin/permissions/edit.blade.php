@@ -10,12 +10,18 @@
             @include('admin.sections.errors')
 
             <form wire:submit.prevent="updatePermission({{ $permission->id }})" method="POST">
-                @csrf
-                @method('put')
-                <div class="form-row">
+                <div class="form row">
                     <div class="form-group col-md-3">
                         <label for="name">نام</label>
                         <input wire:model="name" class="form-control" name="name" type="text">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="name">توانایی</label>
+                        <input wire:model="ability" class="form-control" name="name" type="text">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="name">توضیحات</label>
+                        <textarea wire:model="description" class="form-control" name="name" type="text"></textarea>
                     </div>
                 </div>
 

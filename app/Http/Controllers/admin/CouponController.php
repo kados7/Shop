@@ -15,6 +15,8 @@ class CouponController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Coupon::class);
+
         return view('admin.coupons.index');
     }
 
@@ -25,6 +27,8 @@ class CouponController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Coupon::class);
+
         return view('admin.coupons.create');
     }
 
@@ -58,6 +62,8 @@ class CouponController extends Controller
      */
     public function edit(Coupon $coupon)
     {
+        $this->authorize('update' , $coupon);
+
         return view('admin.coupons.edit',[
             'coupon' => $coupon,
         ]);

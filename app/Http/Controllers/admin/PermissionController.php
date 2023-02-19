@@ -15,6 +15,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Permission::class);
+
         return view('admin.permissions.index');
     }
 
@@ -25,6 +27,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Permission::class);
+
         return view('admin.permissions.create');
     }
 
@@ -58,6 +62,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        $this->authorize('update' , $permission);
+
         return view('admin.permissions.edit',[
             'permission' => $permission,
         ]);

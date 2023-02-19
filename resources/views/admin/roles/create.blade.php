@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
- -افزودن گروه کاربری
+ -افزودن نقش کاربری
 
 @endsection
 

@@ -18,10 +18,15 @@ class Create extends Component
 
     public function createRole(){
         $this->validate();
-
-        Role::create([
+        // dd($this->selected_permissions);
+        $new_role = Role::create([
             'name' => $this->name,
         ]);
+
+        foreach($this->selected_permissions as $permission_id => $permission_name){
+            $new_role->permissions()->attach(Permission::find($permission_id));
+        }
+
 
         alert()->success('نقش مورد نظر ایجاد شد');
         return redirect()->route('admin.roles.index');
@@ -29,7 +34,7 @@ class Create extends Component
     public function render()
     {
         return view('livewire.admin.roles.create',[
-            // 'permissions' => Permission::all(),
+            'permissions' => Permission::all(),
         ]);
     }
 }

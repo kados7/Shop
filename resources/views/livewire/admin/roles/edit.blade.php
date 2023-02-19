@@ -30,9 +30,10 @@
                                 @foreach ($permissions as $permission)
                                     <div class="col-md-3">
                                         <input wire:model.defer="selected_permissions.{{$permission->id}}" type="checkbox" class="form-check-input"
-                                            id="permission_{{ $permission->id }}" value="{{ $permission->name }}">
+                                            id="permission_{{ $permission->id }}" value="{{ $permission->id }}">
+
                                         <label class="form-check-label mr-3" for="permission_{{ $permission->id }}">
-                                            {{ $permission->name }}
+                                            <span style="color: {{ $permission->getColor()}}">{{ $permission->name }}</span>
                                         </label>
                                     </div>
                                 @endforeach

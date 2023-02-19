@@ -20,6 +20,8 @@
                         <tr>
                             <th>#</th>
                             <th>نام</th>
+                            <th>توانایی</th>
+                            <th>توضیحات</th>
                             <th>عملیات</th>
                         </tr>
                     </thead>
@@ -31,7 +33,17 @@
                                 </th>
 
                                 <th>
-                                    {{ $permission->name }}
+                                    <span style="color: {{ $permission->getColor()}}">
+                                        {{ $permission->name }}
+                                    </span>
+                                    <br>
+
+                                </th>
+                                <th>
+                                    {{ $permission->ability }}
+                                </th>
+                                <th>
+                                    {{ $permission->description }}
                                 </th>
                                 <th>
                                     <a class="btn btn-sm btn-outline-info mr-3"

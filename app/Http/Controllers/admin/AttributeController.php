@@ -15,6 +15,7 @@ class AttributeController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Attribute::class);
         return view('admin.attributes.index', [
             'attributes' => Attribute::latest()->paginate(20)
         ]);

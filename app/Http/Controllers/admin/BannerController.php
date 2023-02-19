@@ -16,6 +16,8 @@ class BannerController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Banner::class);
+
         return view('admin.banners.index');
     }
 
@@ -26,6 +28,8 @@ class BannerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Banner::class);
+
         return view('admin.banners.create');
     }
 
@@ -59,6 +63,8 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
+        $this->authorize('update' , $banner);
+
         return view('admin.banners.edit',[
             'banner'=> $banner,
         ]);

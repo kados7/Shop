@@ -8,15 +8,20 @@ use Livewire\Component;
 class Create extends Component
 {
     public $name;
+    public $ability;
+    public $description;
 
     protected $rules =[
-        'name' => 'required|string'
+        'name' => 'required|string',
+        'ability' => 'required|string',
+        'description' => 'required|string',
     ];
     public function storePermission(){
         $this->validate();
         Permission::create([
             'name' => $this->name,
-            'guard_name' => 'web',
+            'ability' => $this->ability,
+            'description' => $this->description,
         ]);
         alert()->success('مجوز جدید با موفقیت اضافه شد');
         return redirect(route('admin.permissions.index'));

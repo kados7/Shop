@@ -15,6 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , User::class);
+
         return view('admin.users.index');
     }
 
@@ -58,6 +60,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update' , $user);
+
         return view('admin.users.edit',[
             'user' =>$user
         ]);

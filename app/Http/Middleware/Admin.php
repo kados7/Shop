@@ -16,11 +16,17 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        foreach(auth()->user()->roles as $role){
-            if($role->id == 1){
-                return $next($request);
-            }
-            abort(404);
-        }
+        return $next($request);
+        // if(auth()->user()){
+        //     foreach(auth()->user()->roles as $role){
+        //         // dd(auth()->user()->roles);
+        //         if($role->id == 1 or $role->id == 2 or $role->id == 3 ){
+        //             return $next($request);
+        //         }
+        //         return redirect(route('login'));
+        //     }
+        // }
+        // return redirect(route('login'));
+
     }
 }

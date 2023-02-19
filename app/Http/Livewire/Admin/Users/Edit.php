@@ -41,8 +41,7 @@ class Edit extends Component
                 'name' => $this->name,
                 'email' => $this->email,
             ]);
-
-            $user->roles()->attach($this->role);
+            $user->roles()->sync($this->role);
             // $user->syncPermissions($this->selected_permissions);
             DB::commit();
         } catch (\Exception $ex) {

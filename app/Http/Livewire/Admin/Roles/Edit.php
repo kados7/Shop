@@ -22,6 +22,7 @@ class Edit extends Component
         'name' => 'required'
     ];
     public function updateRole($role_id){
+        // dd($this->selected_permissions);
         try {
             DB::beginTransaction();
 
@@ -29,9 +30,13 @@ class Edit extends Component
             $role->update([
                 'name' => $this->name,
             ]);
-            // $role->revokePermissionTo($role->permissions);
-            // dd($this->selected_permissions);
-            $role->syncPermissions($this->selected_permissions);
+
+            $role->permissions()->detach();
+            foreach($this->selected_permissions as $permission_id => $permission_name){
+                if($permission_name){
+                    $role->permissions()->attach(Permission::find($permission_id));
+                }
+            }
 
             DB::commit();
         } catch (\Exception $ex) {
