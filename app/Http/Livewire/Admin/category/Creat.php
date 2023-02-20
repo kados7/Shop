@@ -46,8 +46,10 @@ class Creat extends Component
 
     public function store(){
         $this->validate();
-        $icon_name = Carbon::now()->microsecond . $this->icon->getClientOriginalName();
-        $this->icon->storeAs('images/category', $icon_name , 'public');
+        if($this->icon){
+            $icon_name = Carbon::now()->microsecond . $this->icon->getClientOriginalName();
+            $this->icon->storeAs('images/category', $icon_name , 'public');
+        }
 
         try {
             DB::beginTransaction();

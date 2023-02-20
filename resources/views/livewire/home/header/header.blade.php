@@ -235,27 +235,47 @@
             </div>
 
         </header>
-
+        {{-- Header Menu --}}
         @if (! request()->is('admin*'))
             <div class="d-flex flex-row justify-content-center" style="position: relative ; z-index:2">
                 @foreach ($parent_categories as $parent_category)
                     <div class="p-2 bd-highlight">
                         <div>
-                            <div class="dropdown ">
+                            <div class="dropdown">
                                 <button class="dropbtn">{{$parent_category->name}}</button>
                                 <div class="dropdown-content vw-100 p-3">
                                     <div class="dropdown-childeren d-flex flex-row text-center">
                                         @if(count($parent_category->children))
                                             @foreach($parent_category->children as $child_category)
+                                            <div class="dropdown2 ">
+                                                <button class="dropbtn2 btn btn-sm text-black">{{$child_category->name}}</button>
+                                                <div class="dropdown-content2 vw-100 p-3 ">
+                                                    <div class="dropdown-childeren2 row ">
 
-                                                <a href="/main/{{$child_category->slug}}" class="btn text-muted ">{{$child_category->name}}</a><br>
-                                                        @if(count($child_category->children))
+                                                        <div class="col-md-3">
                                                             @foreach($child_category->children as $sub_category)
-                                                            __<a href="/main/{{$sub_category->slug}}"
-                                                                    class="btn btn-sm text-black">{{$sub_category->name}}</a><br>
+                                                                <li><a href="/main/{{$sub_category->slug}}">{{$sub_category->name}}</a></li>
                                                             @endforeach
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                        </div>
 
-                                                        @endif
+
+                                                        <div class="col-md-6">
+                                                            <img height="300" src="{{url(env('CATEGORY_IMAGES_UPLOAD_PATH')).'/'.$child_category->icon}}">
+                                                        </div>
+
+
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             @endforeach
                                         @endif
                                     </div>
@@ -267,6 +287,8 @@
                 @endforeach
             </div>
         @endif
+
+
 
 
 

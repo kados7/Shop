@@ -14,6 +14,12 @@ class Header extends Component
         'refreshComponent' => '$refresh'
     ];
 
+    public $sub_categories;
+    public function mount(){
+        $this->sub_categories = Category::pluck('name','id')->toArray();
+        $categories = [];
+        // dd($this->categories);
+    }
 
     public $search;
     public $search_term;
@@ -53,7 +59,14 @@ class Header extends Component
         auth()->logout();
     }
 
+    public $is_child_category = false;
+    public $selected_category;
 
+    public function showSubCategories($category_id){
+        $this->is_child_category = true;
+        $this->selected_category= Category::find($category_id);
+
+    }
 
     public function render()
     {
