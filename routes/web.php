@@ -24,6 +24,7 @@ use App\Http\Controllers\home\ProductController as HomeProductController;
 use App\Http\Controllers\home\SearchController;
 use App\Http\Controllers\home\UserProfileController;
 use App\Models\Product;
+use App\Models\Role;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Route;
 
@@ -90,5 +91,7 @@ Route::get('/test', function(){
     // CartFacade::clear();
     // dd(CartFacade::getContent());
 
-    dd(auth()->user()->roles->first() , auth()->user()->roles->first()->permissions->toArray());
+    // dd(auth()->user()->roles->first() , auth()->user()->roles->first()->permissions->toArray());
+    $user_admin = Role::where('name','admin')->first()->users;
+        dd($user_admin);
 })->name('home.compare.index');

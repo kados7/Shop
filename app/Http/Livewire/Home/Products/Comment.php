@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Home\Products;
 
 use App\Models\Comment as Comment_model;
 use App\Models\ProductRate;
+use App\Models\Role;
 use App\Models\User;
 use App\Notifications\CommentNotification;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +71,10 @@ class Comment extends Component
         }
 
         // Notification to Admin
-        $user_admin = User::role('super-admin')->get();
+        // $user_admin = User::find(1);
+
+        $user_admin = Role::where('name','admin')->first()->users;
+        // dd($user_admin);
         Notification::send($user_admin , new CommentNotification($new_comment));
 
         // return
