@@ -40,8 +40,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('admin')->prefix('admin/management')->name('admin.')->group(function(){
-    Route::resource('dashboard',AdminController::class );
+Route::prefix('admin/management')->name('admin.')->group(function(){
+    Route::resource('dashboard',AdminController::class )->middleware('admin');
     Route::resource('users',UserController::class);
     Route::resource('permissions',PermissionController::class);
     Route::resource('roles',RoleController::class);

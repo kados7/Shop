@@ -46,26 +46,27 @@ class CartController extends Controller
     public static function coupon_check($code){
         if(! auth()->check()){
             alert()->warning('وارد حساب کاربری شوید','برای استفاده از کد تخفیف ابتدا وارد سایت شوید');
-            return 0;
+            return redirect(route('home.checkout.index'));
         }
-        else{
-            if(! Coupon::where('code' , $code)->where('expired_at', '>' , Carbon::now())->exists()){
-                alert()->warning('کد وجود ندارد',' کد وارد شده صحیح نیست یا تاریخ آن گذشته است');
-                return redirect(route('home.checkout.index'));
-                       }
-            else{
-                if(Coupon::where('code' , $code)->where('type', 'amount')->exists()){
-                    $coupon_amount = Coupon::where('code' , $code)->first()->amount;
-                    return $coupon_amount;
-                }
-                else{
-                    $amount = (CartFacade::getTotal() * Coupon::where('code', $code)->first()->percentage) / 100 ;
-                    ($amount > Coupon::where('code', $code)->first()->max_percentage_amount ) ?
-                        $coupon_amount = Coupon::where('code', $code)->first()->max_percentage_amount : $coupon_amount = $amount ;
-                    return $coupon_amount;
-                }
-            }
+
+        elseif(! Coupon::where('code' , $code)->where('expired_at', '>' , Carbon::now())->exists()){
+            alert()->warning('کد وجود ندارد',' کد وارد شده صحیح نیست یا تاریخ آن گذشته است');
+            return redirect(route('home.checkout.index'));
         }
+
+        elseif(Coupon::where('code' , $code)->where('type', 'amount')->exists()){
+            $coupon_amount = Coupon::where('code' , $code)->first()->amount;
+            return $coupon_amount;
+        }
+
+        elseif(Coupon::where('code' , $code)->where('type', 'percentage')->exists()){
+            $amount = (CartFacade::getTotal() * Coupon::where('code', $code)->first()->percentage) / 100 ;
+            ($amount > Coupon::where('code', $code)->first()->max_percentage_amount ) ?
+                $coupon_amount = Coupon::where('code', $code)->first()->max_percentage_amount : $coupon_amount = $amount ;
+            return $coupon_amount;
+        }
+
+
     }
 
     public function checkout(){

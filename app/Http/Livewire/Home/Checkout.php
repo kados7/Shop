@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Home;
 
+use App\Http\Controllers\app\CouponCalculator;
+use App\Http\Controllers\app\CouponCheckController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\home\PaymentController;
 use App\Models\ProvinceCities;
@@ -56,20 +58,31 @@ class Checkout extends Component
     public $coupon_code;
     public $coupon_amount = 0;
     public $coupon_message = false;
+    public $xx ;
+
     public function submit_coupon(){
-        $coupon = CartController::coupon_check($this->coupon_code);
-        if (is_integer($coupon)){
-            $this->coupon_amount = $coupon;
-            session()->put('coupon' , $coupon);
-        }
-        else{
-            $coupon;
-            session()->has('coupon') ? session()->forget('coupon'): null;
+
+        if(! auth()->check()){
+            alert()->warning(__('cart.auth_login'));
+            return redirect(route('home.checkout.index'));
         }
 
-        if($this->coupon_amount != 0){
-            $this->coupon_message= true;
+        elseif(CouponCheckController::couponExists($this->coupon_code)){
+
+            $coupon_amount= new CouponCalculator($this->coupon_code);
+            $this->coupon_amount = $coupon_amount->calculateCouponAmount();
+
+            session()->put('coupon' , $this->coupon_amount);
+            $this->coupon_message = true;
+
         }
+
+        else{
+            alert()->warning(__('cart.code_error'));
+            session()->has('coupon') ? session()->forget('coupon'): null;
+            return redirect(route('home.checkout.index'));
+        }
+
 
     }
 
