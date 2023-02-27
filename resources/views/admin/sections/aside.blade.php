@@ -57,7 +57,7 @@
         class="asidelink nav-link dropdown-toggle p-1 mt-1
             {{request()->is('admin/management/products*') ? 'bg-success' : ''}}
             {{request()->is('admin/management/tags*') ? 'bg-success' : ''}}
-            {{request()->is('admin/management/brands*') ? 'bg-success' : ''}}"">
+            {{request()->is('admin/management/brands*') ? 'bg-success' : ''}}">
         <span class="ms-1 p-2 mt-2">محصولات</span>
     </a>
     <div class="collapse rounded-bottom
@@ -80,9 +80,30 @@
     </div>
 
 
+    <!-- Posts = Blog-->
+
+    <a  href="#posts" data-bs-toggle="collapse"
+        class="asidelink nav-link dropdown-toggle p-1 mt-1
+            {{request()->is('admin/management/posts*') ? 'bg-success' : ''}}">
+        <span class="ms-1 p-2 mt-2">بلاگ</span>
+    </a>
+    <div class="collapse rounded-bottom
+    {{request()->is('admin/management/posts*') ? 'show' : ''}}"
+        id="posts" data-bs-parent="#menu"
+        style="background: #e1e6bd">
+
+        <a  class="btn btn-sm {{request()->routeIs('admin.posts.index') ? 'text-danger' : ''}}"
+            href="{{route('admin.posts.index')}}">مدیریت پست ها</a>
+
+        <a  class="btn btn-sm {{request()->routeIs('admin.posts.create') ? 'text-danger' : ''}}"
+            href="{{route('admin.posts.create')}}">افزودن پست</a>
+
+    </div>
+
+
         <!-- Banners -->
 
-        <a  href="#banners" data-bs-toggle="collapse"
+    <a  href="#banners" data-bs-toggle="collapse"
         class="asidelink nav-link dropdown-toggle p-1 mt-1
             {{request()->is('admin/management/banners*') ? 'bg-success' : ''}}">
         <span class="ms-1 p-2 mt-2">بنر ها</span>
@@ -97,6 +118,7 @@
         <a  class="btn btn-sm {{request()->routeIs('admin.banners.create') ? 'text-danger' : ''}}"
             href="{{route('admin.banners.create')}}">ساخت بنر جدید</a>
     </div>
+
     <a  href="/admin/management/comments"
         class="asidelink nav-link mt-1  p-1 {{request()->is('admin/management/comments*') ? 'bg-success' : ''}}">
         <span class="ms-1 p-2 mt-2">دیدگاه ها</span>

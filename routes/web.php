@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\PermissionController;
+use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\app\PriceController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\home\CompareController;
 use App\Http\Controllers\home\HomeController;
 use App\Http\Controllers\home\PaymentController;
+use App\Http\Controllers\home\PostController as HomePostController;
 use App\Http\Controllers\home\ProductController as HomeProductController;
 use App\Http\Controllers\home\SearchController;
 use App\Http\Controllers\home\UserProfileController;
@@ -55,7 +57,11 @@ Route::prefix('admin/management')->name('admin.')->group(function(){
     Route::resource('coupons',CouponController::class);
     Route::resource('orders',OrderController::class);
     Route::resource('transactions',TransactionController::class);
+    Route::resource('posts',PostController::class);
 });
+
+Route::get('admin/management/products/{product}/images-edit',[ProductController::class , 'images_edit'])->name('admin.products.images_edit');
+Route::get('admin/management/products/{product}/category-edit',[ProductController::class , 'category_edit'])->name('admin.products.category_edit');
 
 Route::middleware('auth')->prefix('profile')->name('home.')->middleware('auth')->group(function(){
     Route::get('/',[UserProfileController::class , 'index'])->name('user_profile.index');
@@ -67,13 +73,11 @@ Route::middleware('auth')->prefix('profile')->name('home.')->middleware('auth')-
 });
 
 
-Route::get('admin/management/products/{product}/images-edit',[ProductController::class , 'images_edit'])->name('admin.products.images_edit');
-Route::get('admin/management/products/{product}/category-edit',[ProductController::class , 'category_edit'])->name('admin.products.category_edit');
-
 Route::get('/',[HomeController::class , 'index'])->name('home.index');
 Route::get('/contact-us',[HomeController::class , 'contactUs'])->name('home.contact-us');
 Route::get('/main/{category:slug}',[HomeCategoryController::class , 'show'])->name('home.categories.show');
 Route::get('/product/{product:slug}',[HomeProductController::class , 'show'])->name('home.products.show');
+Route::get('/post/{post:slug}',[HomePostController::class , 'show'])->name('home.post.show');
 
 Route::get('/compare',[CompareController::class , 'index'])->name('home.compare.index');
 

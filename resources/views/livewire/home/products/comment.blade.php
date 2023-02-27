@@ -16,35 +16,44 @@
 
         <!-- Comment left -->
         <div class="col-md-9">
+            @include('admin.sections.errors')
+
             <!-- create Comment Modal -->
-            <div class="collapse rounded  p-2 my-2" id="comment" style="background: rgb(248, 242, 230)">
-                <div class="d-flex flex-row">
-                    <input wire:model.defer="is_recommended" class="form-check-input" type="checkbox" checked>
-                    <label for="is_recommended" class="form-label mx-2">خرید محصول را پیشنهاد میکنم</label>
+            @auth
+                <div class="collapse rounded  p-2 my-2" id="comment" style="background: rgb(248, 242, 230)">
+                    <div class="d-flex flex-row">
+                        <input wire:model.defer="is_recommended" class="form-check-input" type="checkbox" checked>
+                        <label for="is_recommended" class="form-label mx-2">خرید محصول را پیشنهاد میکنم</label>
+                    </div>
+                    <div class="mb-3">
+                        <input wire:model.defer="title" type="text" class="form-control" id="comment_title" placeholder="عنوان دیدگاه">
+                    </div>
+                    <div class="mb-3">
+                        <textarea wire:model.defer="text" class="form-control" id="comment_text_area" placeholder="متن دیدگاه"rows="3"></textarea>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <label for="rate" class="form-label">چه امتیازی به محصول میدهید ؟</label>
+                        <input wire:model.defer="rate" type="range"  min="0" max="5" id="rate_input">
+                        <span class="mx-3 h5" id="value"></span>
+                        <script>
+                            const value = document.querySelector("#value")
+                            const input = document.querySelector("#rate_input")
+                            value.textContent = input.value
+                            input.addEventListener("input", (event) => {
+                            value.textContent = event.target.value
+                            })
+                        </script>
+                    </div>
+                    <button wire:click="submit_comment()" class="btn btn-add-card ms-5 my-3" type="button">
+                        ثبت دیدگاه
+                    </button>
                 </div>
-                <div class="mb-3">
-                    <input wire:model.defer="title" type="text" class="form-control" id="comment_title" placeholder="عنوان دیدگاه">
+            @else
+                <div class="collapse rounded  p-2 my-2" id="comment" style="background: rgb(248, 242, 230)">
+                    <li class="alert-text">ابتدا باید به حساب کاربری خود وارد شوید</li>
                 </div>
-                <div class="mb-3">
-                    <textarea wire:model.defer="text" class="form-control" id="comment_text_area" placeholder="متن دیدگاه"rows="3"></textarea>
-                </div>
-                <div class="d-flex flex-row">
-                    <label for="rate" class="form-label">چه امتیازی به محصول میدهید ؟</label>
-                    <input wire:model.defer="rate" type="range"  min="0" max="5" id="rate_input">
-                    <span class="mx-3 h5" id="value"></span>
-                    <script>
-                        const value = document.querySelector("#value")
-                        const input = document.querySelector("#rate_input")
-                        value.textContent = input.value
-                        input.addEventListener("input", (event) => {
-                        value.textContent = event.target.value
-                        })
-                    </script>
-                </div>
-                <button wire:click="submit_comment()" class="btn btn-add-card ms-5 my-3" type="button">
-                    ثبت دیدگاه
-                </button>
-            </div>
+            @endauth
+
             @foreach ($comments as $comment )
                 <div class="row my-2">
                     <div class="col-md-1">

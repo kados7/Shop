@@ -4,9 +4,13 @@ namespace App\Http\Livewire\Admin\Comments;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     protected $listeners = [
         'refreshComponent' => '$refresh'
     ];
@@ -46,7 +50,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.comments.index' , [
-            'comments' => Comment::paginate(10),
+            'comments' => Comment::paginate(20),
         ]);
     }
 }

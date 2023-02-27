@@ -43,9 +43,7 @@ class Product extends Component
             ]);
             $this->emit('refreshComponent');
         }
-        else{
-            $this->mustBeRegistered = true;
-        }
+
 
     }
 

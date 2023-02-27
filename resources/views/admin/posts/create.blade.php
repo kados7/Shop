@@ -1,11 +1,9 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    لیست دیدگاه ها
+افزودن پست جدید
 @endsection
 
 @section('content')
-
-<livewire:admin.comments.index>
-
+    <livewire:admin.posts.create>
 @endsection

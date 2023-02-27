@@ -15,6 +15,13 @@ class UploadController extends Controller
         return $primary_image_name ;
     }
 
+    public static function post_thumbnail_upload($thumbnail){
+        $thumbnail_name = Carbon::now()->timestamp .'-'. $thumbnail->getClientOriginalName();
+        $thumbnail ->storeAs('images\post',$thumbnail_name , 'public');
+
+        return $thumbnail_name ;
+    }
+
     public static function product_images_upload($images_in_array){
 
         $array_of_images = [];

@@ -70,7 +70,6 @@ class Comment extends Component
             dd('Problem');
         }
 
-        // Notification to Admin
         // $user_admin = User::find(1);
 
         $user_admin = Role::where('name','admin')->first()->users;

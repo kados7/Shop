@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Home\Header;
 
 use App\Http\Controllers\CartController;
 use App\Models\Category;
+use App\Models\Notification;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -44,9 +45,17 @@ class Header extends Component
         return redirect('/search?'.$search_to_redirect);
     }
 
-    public function notification_readed(){
-        // dd($notification->id);
-        auth()->user()->unreadNotifications->update(['read_at' => now()]);
+    public function notificationMarkAsRead($notification_id){
+
+        // dd($notification_id);
+        // $notification = Notification::find($notification);
+        $notification_id->markAsRead();
+    }
+
+    public function allNotificationsReaded(){
+        foreach(auth()->user()->unreadNotifications as $unreadNotification){
+            $unreadNotification->markAsRead();
+        }
     }
 
     public function delete_from_cart($item_id){

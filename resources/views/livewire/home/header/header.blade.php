@@ -25,22 +25,24 @@
                                 </a>
                                 <div class="dropdown-menu" style="width:300px; border-color:black; border-radius:0px">
                                     <h6 class="dropdown-header">مرکز پیام</h6>
-                                    @foreach ( auth()->user()->unreadNotifications as $notification )
+                                    @foreach ( auth()->user()->unreadNotifications as $unreadNotification )
+                                    {{-- {{dd($notification->id)}} --}}
                                         <div class="dropdown-item d-flex justify-content-start align-items-center mt-1" style="background:rgba(231, 231, 231, 0.432) ">
-                                            <a class="dropdown-item d-flex justify-content-start align-items-center" href="{{$notification->data['link']}}">
+                                            <a class="dropdown-item d-flex justify-content-start align-items-center" href="{{$unreadNotification->data['link']}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                                                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                                                 </svg>
                                                 <div class="text-end mx-3">
-                                                    <span style="font-size:11px ; color:rgb(255, 0, 0)">{{$notification->created_at->diffForHumans()}}</span>
-                                                    <p style="font-size:13px ; color:black">{{$notification->data['message']}}</p>
+                                                    <span style="font-size:11px ; color:rgb(255, 0, 0)">{{$unreadNotification->created_at->diffForHumans()}}</span>
+                                                    <p style="font-size:13px ; color:black">{{$unreadNotification->data['message']}}</p>
                                                 </div>
                                             </a>
+
                                         </div>
                                     @endforeach
                                     @if (auth()->user()->unreadNotifications()->count() != 0)
-                                        <button wire:click.defer="notification_readed()" type="button" class="btn btn-sm"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="فهمیدم پاکشون کن !">
+                                        <button wire:click.defer="allNotificationsReaded()" type="button" class="btn btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="فهمیدم همشونو پاک کن !">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
                                                 <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
                                                 <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
@@ -264,12 +266,6 @@
                                                         <div class="col-md-6">
                                                             <img height="300" src="{{url(env('CATEGORY_IMAGES_UPLOAD_PATH')).'/'.$child_category->icon}}">
                                                         </div>
-
-
-
-
-
-
 
 
                                                     </div>
