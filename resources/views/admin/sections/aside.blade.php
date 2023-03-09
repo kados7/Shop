@@ -100,6 +100,33 @@
 
     </div>
 
+        <!-- Tickets -->
+
+        <a  href="#tickets" data-bs-toggle="collapse"
+        class="asidelink nav-link dropdown-toggle p-1 mt-1
+            {{request()->is('admin/management/posts*') ? 'bg-success' : ''}}">
+        <span class="ms-1 p-2 mt-2">تیکت ها</span>
+    </a>
+    <div class="collapse rounded-bottom
+    {{request()->is('admin/management/tickets*') ? 'show' : ''}}"
+        id="tickets" data-bs-parent="#menu"
+        style="background: #e1e6bd">
+
+        <a  class="btn btn-sm {{request()->routeIs('admin.tickets.index') ? 'text-danger' : ''}}"
+            href="{{route('admin.tickets.index')}}">مدیریت تیکت ها</a>
+        <br>
+        <a  class="btn btn-sm {{request()->routeIs('admin.ticketpriorities.index') ? 'text-danger' : ''}}"
+            href="{{route('admin.ticketpriorities.index')}}">اولویت ها</a>
+        <br>
+        <a  class="btn btn-sm {{request()->routeIs('admin.ticketstatuses.index') ? 'text-danger' : ''}}"
+            href="{{route('admin.ticketstatuses.index')}}">وضعیت ها </a>
+        <br>
+        <a  class="btn btn-sm {{request()->routeIs('admin.ticketcategories.index') ? 'text-danger' : ''}}"
+            href="{{route('admin.ticketcategories.index')}}">دسته بندی ها </a>
+
+
+    </div>
+
 
         <!-- Banners -->
 

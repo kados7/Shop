@@ -20,12 +20,12 @@ class Admin
         if(auth()->user()){
             foreach(auth()->user()->roles as $role){
                 // dd(auth()->user()->roles);
-                if($role->name == 'admin' or $role->id == 2 or $role->id == 3 ){
+                if($role->name == 'admin' or $role->id == 2 or $role->id == 3 or $role->id == 4 ){
                     return $next($request);
                 }
                 return redirect(route('login'));
             }
-         
+
         }
         return redirect(route('login'));
 

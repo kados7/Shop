@@ -14,6 +14,10 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\TicketCategoryController;
+use App\Http\Controllers\admin\TicketController;
+use App\Http\Controllers\admin\TicketPriorityController;
+use App\Http\Controllers\admin\TicketStatusController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\app\PriceController;
 use App\Http\Controllers\CartController;
@@ -58,6 +62,10 @@ Route::prefix('admin/management')->name('admin.')->group(function(){
     Route::resource('orders',OrderController::class);
     Route::resource('transactions',TransactionController::class);
     Route::resource('posts',PostController::class);
+    Route::resource('tickets',TicketController::class);
+    Route::resource('ticketpriorities',TicketPriorityController::class);
+    Route::resource('ticketstatuses',TicketStatusController::class);
+    Route::resource('ticketcategories',TicketCategoryController::class);
 });
 
 Route::get('admin/management/products/{product}/images-edit',[ProductController::class , 'images_edit'])->name('admin.products.images_edit');
@@ -69,6 +77,8 @@ Route::middleware('auth')->prefix('profile')->name('home.')->middleware('auth')-
     Route::get('/wishlist',[UserProfileController::class , 'wishlist'])->name('user_profile.wishlist');
     Route::get('/address',[UserProfileController::class , 'address'])->name('user_profile.address');
     Route::get('/orders',[UserProfileController::class , 'orders'])->name('user_profile.orders');
+    Route::get('/ticket',[UserProfileController::class , 'ticket'])->name('user_profile.ticket.index');
+    Route::get('/ticket/{ticket:slug}',[UserProfileController::class , 'ticket_show'])->name('user_profile.ticket.show');
 
 });
 

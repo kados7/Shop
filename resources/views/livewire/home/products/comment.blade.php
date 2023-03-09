@@ -18,7 +18,7 @@
         <div class="col-md-9">
             @include('admin.sections.errors')
 
-            <!-- create Comment Modal -->
+            <!-- create Comment Collapse -->
             @auth
                 <div class="collapse rounded  p-2 my-2" id="comment" style="background: rgb(248, 242, 230)">
                     <div class="d-flex flex-row">

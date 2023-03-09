@@ -17,6 +17,9 @@
     <a href="/profile/additional-info" class="asidelink nav-link">
         <i class="fs-4 bi-table"></i> <span class="ms-1 p-2 mt-2">اطلاعات حساب</span>
     </a>
+    <a href="/profile/ticket" class="asidelink nav-link">
+        <i class="fs-4 bi-table"></i> <span class="ms-1 p-2 mt-2">ثبت تیکت پشتیبانی</span>
+    </a>
     <a href="/profile/reset-password" class="asidelink nav-link">
         <i class="fs-4 bi-table"></i> <span class="ms-1 p-2 mt-2">تغییر رمز ورود</span>
     </a>

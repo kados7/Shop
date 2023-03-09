@@ -215,9 +215,10 @@
                     <div class="position-absolute top-0 start-0 p-2 rounded" style="background: rgb(255, 255, 255) ;z-index:2">
                         @foreach ($searchProducts as $searchProduct)
                             <div class="d-flex flex-row p-2 mt-1" style="background: wheat">
-                                <img class="rounded" width="70" src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATH')).'/'.$searchProduct->primary_image}}">
-
-                                <span class="mx-1">{{$searchProduct->name}}</span>
+                                <a class="mx-1" href="/product/{{$searchProduct->slug}}">
+                                    <img class="rounded" width="70" src="{{url(env('PRODUCT_IMAGES_UPLOAD_PATH')).'/'.$searchProduct->primary_image}}">
+                                </a>
+                                <a class="mx-1 text-decoration-none text-black" href="/product/{{$searchProduct->slug}}">{{$searchProduct->name}}</a>
                             </div>
                         @endforeach
                         @if ($haveSearch)
